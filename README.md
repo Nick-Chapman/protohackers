@@ -29,7 +29,7 @@ cd protohackers
 opam exec -- dune build
 ```
 
-### Run echo server, serving my default port,  6516
+### Run echo-server as daemon
 ```
-opam exec -- dune exec -- echo
+./run-daemon.sh
 ```
