@@ -12,7 +12,7 @@ Using Ocaml.
 ```
 sudo add-apt-repository ppa:avsm/ppa
 sudo apt update
-sudo apt install opam
+sudo apt install build-essential opam
 ```
 
 ### Initialize opam and install dune
