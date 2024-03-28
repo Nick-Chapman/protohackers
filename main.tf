@@ -18,10 +18,12 @@ resource "aws_instance" "TF1" {
   instance_type   = "t2.micro"
   key_name        = "my-aws-keypair"
   security_groups = ["ssh-and-my-echo-server"]
-
-  tags = {
-    Name = "HOPE-FOR-EAST"
-  }
+  tags            = { Name = "echo-server" }
+  user_data       = <<-EOF
+  #!/bin/bash -xe
+  sudo snap install docker
+  sudo docker run -dp 0.0.0.0:6516:6516 amadido1/echo-server
+  EOF
 }
 
 resource "aws_ec2_instance_state" "TF1" {
