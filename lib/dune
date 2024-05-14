@@ -1,4 +1,4 @@
 (library
  (name echo_server)
- (libraries lwt lwt.unix threads.posix eio_main lwt_eio)
+ (libraries lwt lwt.unix threads.posix eio_main)
  (preprocess (pps lwt_ppx)))
