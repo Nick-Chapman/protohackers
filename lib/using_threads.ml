@@ -50,7 +50,7 @@ let rec spawn_workers f = function
      spawn_workers f more
 
 let serve() =
-  let () = printf "Serve: %s:%d\n%!" (string_of_inet_addr addr) port in
+  let () = printf "(using_threads) Serve: %s:%d\n%!" (string_of_inet_addr addr) port in
   let cloexec = true in
   let domain = PF_INET in
   let kind = SOCK_STREAM in
@@ -58,5 +58,4 @@ let serve() =
   let addr = ADDR_INET (addr,port) in
   let () = bind fd ~addr in
   let () = listen fd ~max:0 in
-  spawn_workers (worker fd) ["a";"b";"c";"d";"e"];
-  ()
+  spawn_workers (worker fd) ["a";"b";"c";"d";"e"]

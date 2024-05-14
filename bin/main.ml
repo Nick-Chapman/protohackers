@@ -1,1 +1,1 @@
-Echo.Server.serve()
+let () = Echo_server.Entry.run()

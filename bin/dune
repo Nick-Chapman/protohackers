@@ -1,4 +1,4 @@
 (executable
- (public_name echo)
+ (public_name echo_server)
  (name main)
- (libraries echo))
+ (libraries echo_server))
