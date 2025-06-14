@@ -14,10 +14,10 @@ let suck : string -> file_descr -> unit =
   let buf = Bytes.create size in
   let rec loop() =
     let n = read fd ~buf ~pos:0 ~len:size in
-    (*printf "[%s] Read: %s%!" who (Bytes.sub_string buf 0 n);*)
+    printf "[%s] Read: %s%!" who (Bytes.sub_string buf 0 n);
     if n == 0 then () else (
       let nn = write fd ~buf ~pos:0 ~len:n in
-      (*printf "[%s] Echoed #%d bytes\n%!" who nn;*)
+      printf "[%s] Echoed #%d bytes\n%!" who nn;
       if (n!=nn) then panic (sprintf "write: %d != %d" n nn);
       loop()
     )
