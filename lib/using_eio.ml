@@ -3,7 +3,7 @@ let sprintf = Printf.sprintf
 
 let port = 6516
 
-let worker : _ Eio.Net.listening_socket -> string -> unit =
+let worker : Eio.Net.listening_socket -> string -> unit =
   fun listening_socket name ->
   Eio.traceln "[%s] Worker Started" name;
   let rec loop i =
