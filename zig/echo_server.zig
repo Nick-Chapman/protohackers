@@ -6,7 +6,7 @@ pub fn main() !void {
     print("My zig echo server.\n",.{});
     const portnum = 6516;
     // TODO: why two steps here?
-    const loopback : net.Ip4Address = try net.Ip4Address.parse("127.0.0.1",portnum);
+    const loopback : net.Ip4Address = try net.Ip4Address.parse("0.0.0.0",portnum);
     const me : net.Address = net.Address{.in = loopback};
     var server : net.Server = try me.listen(.{.reuse_address = true});
     // TODO: support concurrent connections!
