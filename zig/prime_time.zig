@@ -31,6 +31,10 @@ fn handle(conn: net.Server.Connection) !void {
         const buffer_size = 1024;
         var buf : [buffer_size]u8 = undefined;
         const mes = stream.reader().readUntilDelimiter(&buf,'\n') catch break;
+        if (std.mem.eql(u8, mes, "")) {
+            print("EMP: '{s}' -- not responding\n",.{mes});
+            continue;
+        }
         if (parse_and_test(mes)) |b| {
             try writer.writeAll("{\"method\":\"isPrime\",\"prime\":");
             try writer.writeAll(if (b) "true" else "false");
@@ -48,19 +52,19 @@ fn handle(conn: net.Server.Connection) !void {
 fn parse_and_test(query: []const u8) ?bool {
     const request = parseI(query) orelse {
         if (matchF(query)) {
-            print("FLO: {s}\n",.{query});
+            print("FLO: '{s}'\n",.{query});
             return false;
         }
-        print("MAL: {s}\n",.{query});
+        print("MAL: '{s}' -- {any}\n",.{query,query});
         return null;
     };
     const num = request.number;
     if (!std.mem.eql(u8, request.method, "isPrime")) {
-        print("WRO: {s}\n",.{query});
+        print("WRO: '{s}'\n",.{query});
         return null;
     }
     if (matchS(query)) {
-        print("STR: {s}\n",.{query});
+        print("STR: '{s}'\n",.{query});
         return null;
     }
     const b = is_prime(num);
